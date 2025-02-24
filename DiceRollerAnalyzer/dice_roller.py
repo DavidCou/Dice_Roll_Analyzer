@@ -1,74 +1,32 @@
-import plotly.express as px
-
 class DiceRoller:
     """A class that takes input from a user and creates and rolls dice based on the user input."""
     def __init__(self):
         pass
 
     def run(self):
-        """Main method to run the dice roller and analyzer."""
-        print("\nWelcome to the Dice Roll Analyzer!\n")
+        """Main method to run the dice roller."""
+        print("\nWelcome to the Dice Roller!\n")
         while True:
-            # multi_dice_prompt = (
-            #     "Would you like to create and roll multiple different sided dice at the same time? "
-            #     "e.g. A D6 and a D10 (y/n): "
-            # )
-            # multiple_die_types = self.get_user_input_y_n(multi_dice_prompt)
-            # if multiple_die_types:
-            #     dice_type_specs = self.get_dice_types()
-            #     dice_type_lists = self.create_multiple_dice_types(dice_type_specs)
-            #     self.roll_all_dice(dice_type_lists)
-            # else:
-            #     # Prompt the user for the dice specifications
-            #     num_dice_prompt = "\nHow many sides should each die have? (Enter a whole number greater than 1): "  
-            #     num_sides_prompt = "How many dice would you like to roll? (Enter a whole number greater than 0): "
-            #     num_sides = self.get_user_num_input(num_dice_prompt, 2)
-            #     num_dice = self.get_user_num_input(num_sides_prompt, 1)
+            multi_dice_prompt = (
+                "Would you like to create and roll multiple different sided dice at the same time? "
+                "e.g. A D6 and a D10 (y/n): "
+            )
+            multiple_die_types = self.get_user_input_y_n(multi_dice_prompt)
+            if multiple_die_types:
+                dice_type_specs = self.get_dice_types()
+                dice_type_lists = self.create_multiple_dice_types(dice_type_specs)
+                self.roll_all_dice(dice_type_lists)
+            else:
+                # Prompt the user for the dice specifications
+                num_sides_prompt = "\nHow many sides should each die have? (Enter a whole number greater than 1): "  
+                num_dice_prompt = "How many dice would you like to roll? (Enter a whole number greater than 0): "
+                num_sides = self.get_user_num_input(num_dice_prompt, 2)
+                num_dice = self.get_user_num_input(num_sides_prompt, 1)
                 
-            #     # Create and roll the dice
-            #     dice = self.create_single_dice_type(num_dice, num_sides)
-            #     self.roll_dice_and_display_results(num_dice, num_sides, dice)
-
-            # Prompt the user for the dice specifications
-            # Create a D6.
-            # die = Die()
-            from .die import Die
-            num_sides_prompt = "\nHow many sides should each die have? (Enter a whole number greater than 1): "  
-            num_dice_prompt = "How many dice would you like to roll? (Enter a whole number greater than 0): "
-            num_rolls_prompt = "How many times would you like to roll each dice? (Enter a whole number greater than 10): "
-            num_sides = self.get_user_num_input(num_sides_prompt, 2)
-            # num_dice = self.get_user_num_input(num_dice_prompt, 1)
-            num_rolls = self.get_user_num_input(num_rolls_prompt, 10)
-
-            # Create and roll the dice
-            # dice is a list as I would like to implement rolling multiple dice per roll in a future update
-            dice = self.create_single_dice_type( 1 , num_sides)
-
-            # Make some rolls, and store results in a list.
-            final_results = []
-            for roll_num in range(num_rolls + 1):
-                result = dice[0].roll_die()
-                final_results.append(result)
-
-            # Analyze the results.
-            frequencies = []
-            poss_results = range(1, dice[0].num_sides+1)
-            # max_result = die_1.num_sides + die_2.num_sides
-            # poss_results = range(2, max_result+1)
-            for value in poss_results:
-                frequency = final_results.count(value)
-                frequencies.append(frequency)
-
-            # Visualize the results.
-            formanted_roll_num = "{:,}".format(num_rolls)
-            title = f"Results of Rolling 1 D{num_sides} Dice {formanted_roll_num} Times"
-            labels = {'x': 'Result', 'y': 'Frequency of Result'}
-            fig = px.bar(x=poss_results, y=frequencies, title=title, labels=labels)
-
-            # Further customize chart.
-            fig.update_layout(xaxis_dtick=1)
-
-            fig.show()
+                # Create and roll the dice
+                dice = self.create_single_dice_type(num_dice, num_sides)
+                self.roll_dice_and_display_results(num_dice, num_sides, dice)
+                
             self.ask_to_roll_again()
     
     def get_user_input_y_n(self, prompt):
@@ -160,9 +118,9 @@ class DiceRoller:
             print(f"Your die rolled a {self.roll_single_dice_type(num_dice, dice)}\n")
     
     def ask_to_roll_again(self):
-        """Ask the user if they want to roll and analize again"""
-        prompt = "Would you like to analize more dice rolls? (y/n): "
+        """Ask the user if they want to roll again"""
+        prompt = "Would you like to roll more dice? (y/n): "
         roll_again = self.get_user_input_y_n(prompt)
         if roll_again == False:
-            print("Goodbye!\n")
+            print("\nGoodbye!\n")
             exit()

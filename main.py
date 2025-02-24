@@ -1,4 +1,4 @@
-from DiceRollAnalyzer.dice_roller import DiceRoller
+from DiceRoller.dice_roller import DiceRoller
 
 if __name__ == "__main__":
     dice_roller = DiceRoller()
