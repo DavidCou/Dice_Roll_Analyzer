@@ -1,5 +1,5 @@
-from .dice_roller import DiceRoller
+from .dice_creater import DiceRoller
 from .die import Die
+from .dice_roll_analyzer import DiceRollAnalyzer
 
-__all__ = ["DiceRoller", "Die"]
-
+__all__ = ["DiceRoller", "Die", "DiceRollAnalyzer"]
