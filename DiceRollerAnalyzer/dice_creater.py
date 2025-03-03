@@ -1,7 +1,11 @@
 class DiceRoller:
     """A class that takes input from a user and creates dice based on the user input."""
     def __init__(self):
-        pass
+        self.min_sides = 2
+        self.max_sides = 1000
+        self.min_rolls = 1
+        self.max_rolls = 100000000
+        self.num_dice = 1
 
     def run(self):
         """Main method to run the die roll analyzer."""
@@ -28,13 +32,14 @@ class DiceRoller:
             #     self.roll_dice_and_display_results(num_dice, num_sides, dice)
             
             # Prompt the user for the dice specifications
-            num_sides_prompt = "\nHow many sides should the die have? (Enter a whole number greater than 1): "  
-            num_rolls_prompt = "How many times would you like to roll the die? (Enter a whole number greater than 10): "
-            num_sides = self.get_user_num_input(num_sides_prompt, 2)
-            num_rolls = self.get_user_num_input(num_rolls_prompt, 10)
+            formated_max_rolls = "{:,}".format(self.max_rolls)
+            num_sides_prompt = f"\nHow many sides should the die have? (Enter a whole number between {self.min_sides} and {self.max_sides}): "  
+            num_rolls_prompt = f"How many times would you like to roll the die? (Enter a whole number between {self.min_rolls} and {formated_max_rolls}): "
+            num_sides = self.get_user_num_input(num_sides_prompt, self.min_sides, self.max_sides)
+            num_rolls = self.get_user_num_input(num_rolls_prompt, self.min_rolls, self.max_rolls)
             
             # Create the die
-            dice = self.create_single_dice_type(1, num_sides)
+            dice = self.create_single_dice_type(self.num_dice, num_sides)
 
             # Roll the die, analyze and display the results
             from .dice_roll_analyzer import DiceRollAnalyzer
@@ -58,13 +63,13 @@ class DiceRoller:
             except ValueError as e:
                 print(e)
     
-    def get_user_num_input(self, prompt, min_value):
+    def get_user_num_input(self, prompt, min_value, max_value):
         """Prompt the user for input and validate it as an integer greater than or equal to min_value."""
         while True:
             try:
                 value = int(input(prompt))
-                if value < min_value:
-                    raise ValueError(f"Value must be a whole number greater than or equal to {min_value}.")
+                if value < min_value or value > max_value:
+                    raise ValueError(f"Value must be a whole number greater than {min_value - 1} and less than to {max_value + 1}.")
                 return value
             except ValueError as e:
                 print(f"Invalid input! Please try again with a valid number.")

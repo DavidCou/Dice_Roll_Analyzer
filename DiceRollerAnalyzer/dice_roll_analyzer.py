@@ -12,8 +12,9 @@ class DiceRollAnalyzer:
     def collect_roll_results(self):
         """Roll the dice and add the results to a list."""
         # Make some rolls, and store results in a list.
+        print("Creating and rolling your die...")
         final_results = []
-        for _ in range(self.num_rolls + 1):
+        for _ in range(self.num_rolls):
             result = self.dice[0].roll_die()
             final_results.append(result)
         return final_results 
@@ -24,6 +25,7 @@ class DiceRollAnalyzer:
     def analyze_roll_results(self):
         "Sort the roll results by how often of each die side is landed on."
         # Analyze the results.
+        print("Analyzing your roll results...")
         frequencies = []
         for value in self.poss_results:
             frequency = self.final_results.count(value)
