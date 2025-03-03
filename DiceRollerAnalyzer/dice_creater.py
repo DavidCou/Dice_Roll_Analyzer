@@ -2,9 +2,9 @@ class DiceRoller:
     """A class that takes input from a user and creates dice based on the user input."""
     def __init__(self):
         self.min_sides = 2
-        self.max_sides = 1000
+        self.max_sides = 100
         self.min_rolls = 1
-        self.max_rolls = 100000000
+        self.max_rolls = 10_000_000
         self.num_dice = 1
 
     def run(self):

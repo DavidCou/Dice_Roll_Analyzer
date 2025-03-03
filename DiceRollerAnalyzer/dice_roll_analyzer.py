@@ -37,7 +37,7 @@ class DiceRollAnalyzer:
         # Visualize the results.
         formanted_roll_num = "{:,}".format(self.num_rolls)
         frequencies = self.analyze_roll_results()
-        title = f"Results of Rolling 1 D{self.dice[0].num_sides} Dice {formanted_roll_num} Times"
+        title = f"Results of Rolling 1 {self.dice[0].num_sides} Sided Dice {formanted_roll_num} Times"
         labels = {'x': 'Result', 'y': 'Frequency of Result'}
         fig = px.bar(x=self.poss_results, y=frequencies, title=title, labels=labels)
 
